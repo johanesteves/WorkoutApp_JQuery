@@ -1,0 +1,17 @@
+<h2>
+  <span>Exercises</span>
+  <%=link_to 'Add Exercise', new_exercise_path, class: 'btn btn-success pull-right'%>
+</h2>
+
+<div class="container">
+  <%=form_tag(exercises_path, method: :get) do %>
+      <div class="form-group row">
+        <%=select_tag :filter, options_for_select(Exercise.body_parts, params[:filter]), include_blank: 'All', class: "form-control col-8"%>
+        <%=submit_tag 'Filter', name: nil, class: 'form-control col-2'%>
+      </div>
+  <% end %>
+</div>
+
+<ul>
+  <%= render(@exercises) || 'There are no exercises at the moment.' %>
+</ul>

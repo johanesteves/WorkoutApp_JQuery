@@ -1,0 +1,9 @@
+<div>
+  <%= form_for(workout, html: {class: 'form-inline'}) do |f| %>
+      <%= f.label :name, "Name: ", class:'mr-sm-2'%>
+      <%= f.text_field :name, class: 'form-control mb-2 mr-sm-2 mb-sm-0' %>
+      <%= f.label :date, "Date: ", class:'mr-sm-2'%>
+      <%= f.date_field :date, max: Date.today, value: (Date.today unless workout.date), class: 'form-control mb-2 mr-sm-2 mb-sm-0'%>
+      <%=f.submit class: 'btn btn-success'%>
+  <% end %>
+</div>

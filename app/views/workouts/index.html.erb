@@ -1,0 +1,9 @@
+<h2>Workouts</h2>
+
+<%=render 'form', workout: @workout %>
+<br>
+<%=link_to "New Workout with Details", new_workout_path, class: "btn btn-md btn-primary"%>
+<%=link_to "Current Week's Progress", workout_current_week_path, class: "btn btn-md btn-secondary"%>
+<br><br>
+
+<%= render 'sorted_workouts', sorted_workouts: @workouts %>

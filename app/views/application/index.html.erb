@@ -1,0 +1,18 @@
+<div class="jumbotron" style="background-color: #007aff1a">
+  <h1 class="display-3">Welcome Coders</h1>
+  <p class="lead">
+    Working out is tough. It's even harder when you are an awesome coder.<br>
+    <strong>Workouts 4 Coders</strong> will help you change that and get back in shape.
+  </p>
+    <div class="btn-group">
+      <% if signed_in? %>
+        <%=link_to "Get started", workouts_path, class: "btn btn-lg btn-success" %>
+      <% else %>
+        <%=link_to "Sign up today", new_user_registration_path, class: "btn btn-lg btn-success" %>
+        <%=link_to user_github_omniauth_authorize_path, class: "btn btn-lg btn-secondary" do %>
+            <span class="mega-octicon octicon-mark-github" aria-hidden="true"></span> Github log in
+        <% end %>
+      <% end %>
+    </div>
+</div>
+

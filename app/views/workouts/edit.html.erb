@@ -1,0 +1,26 @@
+<h1><%=@workout.name%></h1>
+
+<%=render 'shared/errors_messages', object: @workout%>
+
+
+
+  <%= form_for(@workout) do |f| %>
+  <div class = "form-inline">
+
+  <%= f.label :name, "Name: ", class:'mr-sm-2'%>
+    <%= f.text_field :name, class: 'form-control mb-2 mr-sm-2 mb-sm-0' %>
+    <%= f.label :date, "Date: ", class:'mr-sm-2'%>
+    <%= f.date_field :date, max: Date.today, value: (Date.today unless @workout.date), class: 'form-control mb-2 mr-sm-2 mb-sm-0'%>
+  </div>
+  <br>
+  <div class = "form-inline">
+  <%= f.collection_check_boxes :exercise_ids, Exercise.all, :id, :name do |b| %>
+        <div class = "form-check form-check-inline">
+          <%=b.check_box(class: "form-check-input")%>  <%=b.label(class:"form-check-label")%>
+        </div>
+      <% end %>
+    </div>
+  <br>
+    <%=f.submit class: 'btn btn-success'%>
+  <% end %>
+

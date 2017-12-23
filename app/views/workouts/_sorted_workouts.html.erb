@@ -1,0 +1,11 @@
+<%sorted_workouts.each do |date, workouts| %>
+  <ul>
+    <li>
+      <%=full_date(date)%><br>
+
+      <% workouts.each do |workout| %>
+        <%= link_to workout.name, workout_path(workout)%><br>
+      <% end %>
+    </li>
+  </ul>
+<% end %>

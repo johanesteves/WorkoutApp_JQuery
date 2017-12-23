@@ -1,0 +1,5 @@
+<h2>Weekly Progress</h2>
+<h6><%=full_date(Date.today.at_beginning_of_week)%> - <%=full_date(Date.today.at_end_of_week)%></h6>
+<br>
+
+<%= render 'sorted_workouts', sorted_workouts: @workouts %>

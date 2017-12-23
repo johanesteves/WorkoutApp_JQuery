@@ -1,0 +1,16 @@
+<h2>Reports</h2>
+
+<br>
+<%= form_tag(workout_reports_path, method: :get) do %>
+  <%=date_field_tag :date_filter_beg %>
+  <%=date_field_tag :date_filter_end %>
+  <%=submit_tag 'Filter', name: nil %>
+<% end %>
+
+
+<br><br>
+<ul>
+<%@workouts.each do |workout| %>
+  <li><%= link_to workout.name, workout_path(workout)%> <%= workout.date %></li>
+<% end %>
+</ul>
