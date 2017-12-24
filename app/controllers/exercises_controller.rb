@@ -4,6 +4,8 @@ class ExercisesController < ApplicationController
 
   def index
     @exercises = Exercise.filter_body_part(params[:filter])
+    @exercise = Exercise.new
+    #render json: @exercises
   end
 
   def show; end
@@ -15,7 +17,7 @@ class ExercisesController < ApplicationController
   def create
     @exercise = Exercise.new(exercise_params)
     if @exercise.save
-      redirect_to exercise_path(@exercise)
+      render json: @exercise, status: 201
     else
       render :new
     end
