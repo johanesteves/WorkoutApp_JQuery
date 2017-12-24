@@ -17,9 +17,10 @@ class ExercisesController < ApplicationController
   def create
     @exercise = Exercise.new(exercise_params)
     if @exercise.save
+      # @exercises = Exercise.filter_body_part("")
       render json: @exercise, status: 201
     else
-      render :new
+      render json: { errors: @exercise.errors.full_messages }, status: 422
     end
   end
 
