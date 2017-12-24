@@ -2,6 +2,12 @@
   <span>Exercises</span>
   <%=link_to 'Add Exercise', new_exercise_path, class: 'btn btn-success pull-right'%>
 </h2>
+<div>
+<%= render 'shared/errors_messages', object: @exercise %>
+<%= render 'form', exercise: @exercise%>
+</div>
+<br>
+
 
 <div class="container">
   <%=form_tag(exercises_path, method: :get) do %>
@@ -12,6 +18,6 @@
   <% end %>
 </div>
 
-<ul>
+<ul id = "exerciseList">
   <%= render(@exercises) || 'There are no exercises at the moment.' %>
 </ul>
