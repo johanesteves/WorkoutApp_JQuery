@@ -23,9 +23,9 @@ function newExercise() {
         posting.done(function (data) {
             $('#submitExercise').removeAttr('disabled');
 
-            var exercise = data["data"];
-            var name = exercise.attributes["name"];
-            var bodypart = exercise.attributes["bodypart"];
+            var exercise = data;
+            var name = exercise["name"];
+            var bodypart = exercise["bodypart"];
 
             var exerciseURL = '<li><a href = "/exercises/' + exercise["id"] + '"  data-id="' + exercise["id"] + '">' + name + '</a>' + " | " + bodypart + ' </li>';
 
