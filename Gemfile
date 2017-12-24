@@ -5,6 +5,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+gem 'active_model_serializers', '0.10.6'
 gem 'devise'
 gem 'omniauth-github'
 gem 'dotenv-rails'
