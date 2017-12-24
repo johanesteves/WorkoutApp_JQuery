@@ -8,9 +8,17 @@
 </div>
 <br>
 <br>
+<div>
+  <a href="#" class="js-next" data-id="<%=@workout.id%>">Next Workout</a>
+</div>
+<br>
 
-<% @workout.exercise_workouts.each do |exercise_workout| %>
-  <li>
-    <%=link_to exercise_workout.exercise.name, exercise_path(exercise_workout.exercise)%> | <em><%= exercise_workout.exercise.bodypart %></em> | Reps: <%=exercise_workout.reps || "0"  %>
-  </li>
-<% end %>
+<div>
+  <ul id="workoutList">
+    <% @workout.exercise_workouts.each do |exercise_workout| %>
+      <li>
+        <%=link_to exercise_workout.exercise.name, exercise_path(exercise_workout.exercise)%> | <em><%= exercise_workout.exercise.bodypart %></em> | Reps: <%=exercise_workout.reps || "0"  %>
+      </li>
+    <% end %>
+  </ul>
+</div>
