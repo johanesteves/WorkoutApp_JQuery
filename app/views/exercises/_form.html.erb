@@ -4,6 +4,6 @@
     <%=f.label :bodypart, "Body Part: ", class:'mr-sm-2' %>
     <%=f.select :bodypart, Exercise.body_parts, {include_blank: "-select-"}, class:'custom-select mb-2 mr-sm-2 mb-sm-0'%>
 
-    <%=f.submit class: 'btn btn-success' %>
+    <%=f.submit class: 'btn btn-success', id: 'submitExercise' %>
 
 <% end %>
