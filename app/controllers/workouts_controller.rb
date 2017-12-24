@@ -4,7 +4,12 @@ class WorkoutsController < ApplicationController
 
   def index
     @workouts = current_user.workouts.sorted_by_date
+    # current_user.workouts.all.order('date DESC').pluck('id')
     @workout = Workout.new
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render json: current_user.workouts.pluck('id') }
+    end
   end
 
   def new
@@ -14,6 +19,11 @@ class WorkoutsController < ApplicationController
   end
 
   def show
+    respond_to do |format|
+      format.html { render :show }
+      format.json { render json: @workout }
+    end
+
   end
 
   def current_week
