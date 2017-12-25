@@ -1,11 +1,10 @@
-$(document).ready(function () {
-    attachListeners()
+document.addEventListener("turbolinks:load",function () {
+    attachExerciseListeners();
 });
 
-function attachListeners() {
+function attachExerciseListeners() {
     newExercise()
 }
-
 
 function newExercise() {
     $('#new_exercise').submit(function (e) {
@@ -16,7 +15,6 @@ function newExercise() {
         this.reset();
 
         posting.fail(function (data) {
-            debugger;
             // alert("error")
         });
 
