@@ -6,6 +6,18 @@ function attachExerciseListeners() {
     newExercise()
 }
 
+class Exercise{
+    constructor(name, bodypart, id){
+        this.name = name;
+        this.bodypart = bodypart;
+        this.id = id;
+    }
+
+    mergeExerciseUrl() {
+        return '<a href = "/exercises/' + this.id + '"  data-id="' + this.id + '">' + this.name + '</a>' + " | " + this.bodypart
+    }
+}
+
 function newExercise() {
     $('#new_exercise').submit(function (e) {
         e.preventDefault();
@@ -22,12 +34,10 @@ function newExercise() {
             $('#submitExercise').removeAttr('disabled');
 
             var exercise = data;
-            var name = exercise["name"];
-            var bodypart = exercise["bodypart"];
+            var newExercise = new Exercise(exercise.name, exercise.bodypart, exercise.id);
+            var exerciseURL = '<li>'+ newExercise.mergeExerciseUrl() + ' </li>';
 
-            var exerciseURL = '<li><a href = "/exercises/' + exercise["id"] + '"  data-id="' + exercise["id"] + '">' + name + '</a>' + " | " + bodypart + ' </li>';
-
-            $('ul#exerciseList').append(exerciseURL);
+            $('ul#exerciseList').prepend(exerciseURL);
         });
 
     })
