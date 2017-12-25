@@ -23,7 +23,6 @@ class WorkoutsController < ApplicationController
       format.html { render :show }
       format.json { render json: @workout }
     end
-
   end
 
   def current_week
@@ -67,6 +66,10 @@ class WorkoutsController < ApplicationController
 
   def reports
     @workouts = current_user.workouts.date_filter(params[:date_filter_beg], params[:date_filter_end])
+    respond_to do |format|
+      format.html { render :reports }
+      format.json { render json: @workouts }
+    end
   end
 
   private
