@@ -1,9 +1,9 @@
-$(document).ready(function () {
-    attachListeners()
+document.addEventListener("turbolinks:load",function () {
+    attachWorkoutListeners();
 });
 
-function attachListeners() {
-    getWorkoutExercises()
+function attachWorkoutListeners() {
+    getWorkoutExercises();
 }
 
 function getWorkoutExercises() {
@@ -31,13 +31,16 @@ function getWorkoutExercises() {
 
             $.get('/workouts/' + nextId + '.json', function (data) {
 
-                debugger;
                 var workoutList = $('ul#workoutList');
+                var workoutName = data["name"];
+                var workoutDate = data["date"];
+
+                $('h2').html(workoutName + "<small> | " + workoutDate + "</small>");
                 workoutList.empty();
 
                 if(data.exercises.length > 0){
                     for (i = 0; i < data.exercises.length; i++) {
-                    workoutList.append('<li><a href="/exercises/' + data.exercises[i].id + '">' + data.exercises[i].name + '</a> </li>' )
+                    workoutList.append('<li><a href="/exercises/' + data.exercises[i].id + '">' + data.exercises[i].name + '</a>' + ' | <em>' + data.exercises[i].bodypart + '</em> | Reps: ' + '</li>' )
                     }
                 }else{
                     workoutList.append('No exercises just yet. Add one above!')
