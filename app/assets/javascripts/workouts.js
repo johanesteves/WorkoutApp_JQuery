@@ -22,7 +22,6 @@ function getWorkoutReports() {
             this.reset();
         }
 
-
         var values = $(this).serialize();
 
         $.get('/workouts/reports.json?' + values, function (data) {
@@ -39,6 +38,7 @@ function getWorkoutReports() {
                 workoutList.append('No workouts found for the selected date range.')
             }
         });
+        $('#clearFilter').removeData('clicked')
     })
 }
 
@@ -66,7 +66,6 @@ function getWorkoutExercises() {
             }
 
             $.get('/workouts/' + nextId + '.json', function (data) {
-
                 var workoutList = $('ul#workoutList');
                 var workoutName = data["name"];
                 var workoutDate = data["date"];
@@ -82,7 +81,11 @@ function getWorkoutExercises() {
                     workoutList.append('No exercises just yet. Add one above!')
                 }
 
-                $('.js-next').attr('data-id', nextId)
+                $('.js-next').attr('data-id', nextId);
+                $('a#editExercises').attr("href", "/workouts/" + nextId +"/edit");
+                $('a#deleteWorkout').attr("href", "/workouts/" + nextId);
+                $('a#updateReps').attr("href", "/workouts/" + nextId +"/exercises")
+
             });
         });
     })
