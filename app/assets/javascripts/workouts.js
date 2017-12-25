@@ -4,6 +4,42 @@ document.addEventListener("turbolinks:load",function () {
 
 function attachWorkoutListeners() {
     getWorkoutExercises();
+    clearWorkoutReports();
+    getWorkoutReports();
+}
+
+function clearWorkoutReports() {
+    $('#clearFilter').click(function (e) {
+        $(this).data('clicked', true);
+    })
+}
+
+function getWorkoutReports() {
+    $('#filterReport').submit(function (e) {
+        e.preventDefault();
+
+        if($('#clearFilter').data('clicked')) {
+            this.reset();
+        }
+
+
+        var values = $(this).serialize();
+
+        $.get('/workouts/reports.json?' + values, function (data) {
+            var workoutList = $('#reportWorkoutList');
+            workoutList.empty();
+
+            var workouts = data;
+
+            if(workouts.length > 0){
+                for (i = 0; i < workouts.length; i++) {
+                    workoutList.append('<li><a href="/workout/' + workouts[i].id + '">' + workouts[i].name + '</a>' + " " + workouts[i].date + '</li>')
+                }
+            }else{
+                workoutList.append('No workouts found for the selected date range.')
+            }
+        });
+    })
 }
 
 function getWorkoutExercises() {
