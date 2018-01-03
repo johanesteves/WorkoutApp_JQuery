@@ -1,5 +1,5 @@
 <%= render 'shared/errors_messages', object: @workout %>
-<h2><%=@workout.name %> <small>| <%=full_date(@workout.date)%></small></h2>
+<h2><%=@workout.name %> <small>| <%=(@workout.date)%></small></h2>
 <div class="btn-group" role="group" aria-label="Basic example">
   <%= link_to "Edit Exercises", edit_workout_path(@workout), class: "btn btn-secondary", id: 'editExercises' %>
   <%= link_to "Delete", workout_path(@workout), method: :delete, class: "btn btn-secondary", id: 'deleteWorkout' %>
@@ -12,7 +12,7 @@
   <ul id="workoutList">
     <% @workout.exercise_workouts.each do |exercise_workout| %>
       <li>
-        <%=link_to exercise_workout.exercise.name, exercise_path(exercise_workout.exercise)%> | <em><%= exercise_workout.exercise.bodypart %></em> | Reps: <%=exercise_workout.reps || "0"  %>
+        <%=link_to exercise_workout.exercise.name, exercise_path(exercise_workout.exercise)%> | <em><%= exercise_workout.exercise.bodypart %></em>
       </li>
     <% end %>
   </ul>
