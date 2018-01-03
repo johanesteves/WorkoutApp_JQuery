@@ -5,6 +5,7 @@ document.addEventListener("turbolinks:load",function () {
 function attachWorkoutListeners() {
     getWorkoutExercises();
     clearWorkoutReports();
+    viewReports();
     getWorkoutReports();
 }
 
@@ -23,7 +24,6 @@ function getWorkoutReports() {
         }
 
         var values = $(this).serialize();
-
         $.get('/workouts/reports.json?' + values, function (data) {
             var workoutList = $('#reportWorkoutList');
             workoutList.empty();
@@ -32,7 +32,7 @@ function getWorkoutReports() {
 
             if(workouts.length > 0){
                 for (i = 0; i < workouts.length; i++) {
-                    workoutList.append('<li><a href="/workout/' + workouts[i].id + '">' + workouts[i].name + '</a>' + " " + workouts[i].date + '</li>')
+                    workoutList.append('<li><a href="/workouts/' + workouts[i].id + '">' + workouts[i].name + '</a>' + " " + workouts[i].date + '</li>')
                 }
             }else{
                 workoutList.append('No workouts found for the selected date range.')
@@ -88,4 +88,43 @@ function getWorkoutExercises() {
             });
         });
     })
+}
+
+function viewReports(values) {
+
+    $('#viewReports').click(function (e) {
+        e.preventDefault();
+
+        var form = `
+        <h2>Reports</h2> <br>
+        <form id="filterReport" action="/workouts/reports" accept-charset="UTF-8" method="get">
+          <input name="utf8" type="hidden" value="✓">
+          <input type="date" name="date_filter_beg" id="date_filter_beg">
+          <input type="date" name="date_filter_end" id="date_filter_end">
+          <input type="submit" value="Filter" id="submitFilter">
+          <input type="submit" value="Reset" id="clearFilter">
+        </form><br>
+        <ul id="reportWorkoutList">
+        </ul>
+        `;
+
+        $.get('/workouts/reports.json?' + values, function (data) {
+            var workoutList = $('#reportWorkoutList');
+            workoutList.empty();
+
+            var workouts = data;
+
+            if(workouts.length > 0){
+                for (i = 0; i < workouts.length; i++) {
+                    workoutList.append('<li><a href="/workouts/' + workouts[i].id + '">' + workouts[i].name + '</a>' + " " + workouts[i].date + '</li>')
+                }
+            }else{
+                workoutList.append('No workouts found for the selected date range.')
+            }
+        });
+
+        $('#app-container').html(form);
+        getWorkoutReports();
+    })
+
 }
