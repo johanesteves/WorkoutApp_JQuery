@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   get 'workouts/current_week', to: 'workouts#current_week', as: 'workout_current_week'
   get 'workouts/reports', to: 'workouts#reports', as: 'workout_reports'
+  get 'workouts/workout_ids', to: 'workouts#workout_ids', as: 'workout_ids'
   resources :workouts
   get 'workouts/:id/exercises', to: 'workouts#exercises', as: 'workout_exercises'
 
