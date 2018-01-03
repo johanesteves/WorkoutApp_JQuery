@@ -2,7 +2,8 @@
   <span>Exercises</span>
 </h2>
 <div>
-<%= render 'shared/errors_messages', object: @exercise %>
+  <div id="errorMsg">
+  </div>
 <%= render 'form', exercise: @exercise%>
 </div>
 <br>
