@@ -8,7 +8,12 @@ class ExercisesController < ApplicationController
     #render json: @exercises
   end
 
-  def show; end
+  def show
+    respond_to do |format|
+      format.html { render :show }
+      format.json { render json: @exercise }
+    end
+  end
 
   def new
     @exercise = Exercise.new
