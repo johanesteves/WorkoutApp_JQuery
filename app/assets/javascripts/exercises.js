@@ -64,7 +64,7 @@ function showExercise() {
         $.get('/exercises/' + id + '.json', function (data) {
             var exercise = new Exercise(data);
             var exerciseHTML = exercise.exerciseCard();
-            $('.app-container').html(exerciseHTML);
+            $('#app-container').html(exerciseHTML);
         });
     })
 }
