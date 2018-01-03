@@ -47,10 +47,9 @@ function getWorkoutExercises() {
         e.preventDefault();
         var currentId = this.dataset.id;
 
-        var allWorkout = $.get('/workouts.json', function () {
-        });
+        var allWorkouts = $.get('/workouts/workout_ids.json');
 
-        allWorkout.done(function(workoutsData){
+        allWorkouts.done(function(workoutsData){
             var workoutIds = workoutsData;
 
             var workoutIndex = workoutIds.findIndex(function(x){
@@ -75,7 +74,7 @@ function getWorkoutExercises() {
 
                 if(data.exercises.length > 0){
                     for (i = 0; i < data.exercises.length; i++) {
-                    workoutList.append('<li><a href="/exercises/' + data.exercises[i].id + '">' + data.exercises[i].name + '</a>' + ' | <em>' + data.exercises[i].bodypart + '</em> | Reps: ' + '</li>' )
+                    workoutList.append('<li><a href="/exercises/' + data.exercises[i].id + '">' + data.exercises[i].name + '</a>' + ' | <em>' + data.exercises[i].bodypart + '</em>' + '</li>' )
                     }
                 }else{
                     workoutList.append('No exercises just yet. Add one above!')
