@@ -3,7 +3,8 @@ document.addEventListener("turbolinks:load",function () {
 });
 
 function attachExerciseListeners() {
-    newExercise()
+    newExercise();
+    // showExercise()
 }
 
 class Exercise{
@@ -26,8 +27,17 @@ function newExercise() {
         var posting = $.post('/exercises', values);
         this.reset();
 
+
         posting.fail(function (data) {
-            // alert("error")
+            $('#submitExercise').removeAttr('disabled');
+
+            var errorHtml = [];
+
+            data.responseJSON.errors.map((error)=> {
+                errorHtml.push('<li>'+ error +'</li>')
+            });
+
+            $('#errorMsg').html('<ul>'+ errorHtml.join('') +'</ul>')
         });
 
         posting.done(function (data) {
@@ -42,3 +52,9 @@ function newExercise() {
 
     })
 }
+
+// function showExercise() {
+//     $('.showExercise').click(function (e) {
+//         e.preventDefault();
+//     })
+// }
