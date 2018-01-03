@@ -4,12 +4,16 @@ class WorkoutsController < ApplicationController
 
   def index
     @workouts = current_user.workouts.sorted_by_date
-    # current_user.workouts.all.order('date DESC').pluck('id')
     @workout = Workout.new
     respond_to do |format|
       format.html { render :index }
-      format.json { render json: current_user.workouts.pluck('id') }
+      format.json { render json: @workouts }
     end
+  end
+
+  def workout_ids
+    workout_ids = current_user.workouts.pluck('id')
+    render json: workout_ids
   end
 
   def new
@@ -35,7 +39,7 @@ class WorkoutsController < ApplicationController
       flash[:success] = 'Workout created successfully.'
     else
       flash[:danger] = @workout.errors.full_messages.join('. ')
-      return redirect_to new_workout_path if params[:workout][:exercise_ids]
+      return redirect_to new_workout_path if params[:workout][:exercises_attributes]
     end
     redirect_to workouts_path
   end
